@@ -373,10 +373,17 @@ const ModalContent = styled(motion.div)`
   position: relative;
   border: 1px solid var(--border-color);
 
-  @media (max-width: 480px) {
-    border-radius: 12px;
+  @media (max-width: 768px) {
     max-width: 95vw;
     max-height: 95vh;
+    border-radius: 12px;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 8px;
+    max-width: 98vw;
+    max-height: 98vh;
+    margin: 1vh;
   }
 `;
 
@@ -445,6 +452,7 @@ const ModalSwiper = styled(Swiper)`
     align-items: center;
     justify-content: center;
     background: var(--bg-primary);
+    overflow: hidden;
   }
 
   .swiper-button-next,
@@ -486,6 +494,62 @@ const ModalImage = styled.img`
   max-height: 100%;
   object-fit: contain;
   border-radius: 8px;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  
+  /* Enable pinch-to-zoom on mobile */
+  @media (max-width: 768px) {
+    object-fit: contain;
+    width: auto;
+    height: auto;
+    max-width: 95%;
+    max-height: 95%;
+  }
+`;
+
+// Mobile-friendly image viewer component
+const MobileImageViewer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--bg-primary);
+  
+  /* Enable touch gestures */
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+`;
+
+const ZoomableImage = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: transform 0.1s ease;
+  
+  /* Enable pinch-to-zoom and panning */
+  touch-action: manipulation;
+  
+  /* Ensure proper mobile display */
+  @media (max-width: 768px) {
+    width: auto;
+    height: auto;
+    max-width: 95%;
+    max-height: 95%;
+    /* Enable native pinch-to-zoom on mobile */
+    -webkit-user-zoom: zoom;
+    user-zoom: zoom;
+  }
+  
+  /* Prevent text selection and improve touch experience */
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
 `;
 
 const Projects = () => {
@@ -497,6 +561,7 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const filters = [
     { id: 'all', label: 'All Projects', icon: <FiCode /> },
@@ -636,12 +701,94 @@ const Projects = () => {
 
   const openGallery = (project) => {
     setSelectedProject(project);
+    setCurrentImageIndex(0);
     setIsModalOpen(true);
   };
 
   const closeGallery = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
+    setCurrentImageIndex(0);
+  };
+
+  const nextImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedProject.images.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedProject.images.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index);
+  };
+
+  // Keyboard navigation
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isModalOpen) return;
+      
+      switch (e.key) {
+        case 'ArrowLeft':
+          prevImage();
+          break;
+        case 'ArrowRight':
+          nextImage();
+          break;
+        case 'Escape':
+          closeGallery();
+          break;
+        default:
+          break;
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  // Touch gesture handling for mobile
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      nextImage();
+    } else if (isRightSwipe) {
+      prevImage();
+    }
+
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   return (
@@ -777,27 +924,121 @@ const Projects = () => {
                 </CloseButton>
               </ModalHeader>
               <ModalGallery>
-                <ModalSwiper
-                  modules={[Navigation, Pagination, Autoplay]}
-                  navigation={true}
-                  pagination={{ clickable: true }}
-                  autoplay={{
-                    delay: 4000,
-                    disableOnInteraction: false,
-                  }}
-                  loop={true}
-                  spaceBetween={0}
-                  slidesPerView={1}
+                <MobileImageViewer
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
                 >
-                  {selectedProject.images.map((image, imageIndex) => (
-                    <SwiperSlide key={imageIndex}>
-                      <LazyImage 
-                        src={image} 
-                        alt={`${selectedProject.title} - Screenshot ${imageIndex + 1}`}
+                  <ZoomableImage
+                    src={selectedProject.images[currentImageIndex]}
+                    alt={`${selectedProject.title} - Screenshot ${currentImageIndex + 1}`}
+                    draggable={false}
+                  />
+                  
+                  {/* Navigation Controls */}
+                  <motion.button
+                    onClick={prevImage}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    style={{
+                      position: 'absolute',
+                      left: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'rgba(139, 92, 246, 0.9)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '40px',
+                      height: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 10,
+                      fontSize: '18px'
+                    }}
+                  >
+                    <FiChevronLeft />
+                  </motion.button>
+                  
+                  <motion.button
+                    onClick={nextImage}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    style={{
+                      position: 'absolute',
+                      right: '10px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'rgba(139, 92, 246, 0.9)',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '50%',
+                      width: '40px',
+                      height: '40px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      zIndex: 10,
+                      fontSize: '18px'
+                    }}
+                  >
+                    <FiChevronRight />
+                  </motion.button>
+                  
+                  {/* Image Counter */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    background: 'rgba(0, 0, 0, 0.7)',
+                    color: 'white',
+                    padding: '5px 12px',
+                    borderRadius: '15px',
+                    fontSize: '12px',
+                    fontWeight: '500'
+                  }}>
+                    {currentImageIndex + 1} / {selectedProject.images.length}
+                  </div>
+                  
+                  {/* Thumbnail Navigation */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '50px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    display: 'flex',
+                    gap: '8px',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    maxWidth: '90%',
+                    padding: '0 10px'
+                  }}>
+                    {selectedProject.images.map((image, index) => (
+                      <motion.img
+                        key={index}
+                        src={image}
+                        alt={`Thumbnail ${index + 1}`}
+                        onClick={() => goToImage(index)}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        style={{
+                          width: '35px',
+                          height: '35px',
+                          objectFit: 'cover',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          border: index === currentImageIndex ? '2px solid var(--primary-color)' : '2px solid transparent',
+                          opacity: index === currentImageIndex ? 1 : 0.7,
+                          flexShrink: 0
+                        }}
                       />
-                    </SwiperSlide>
-                  ))}
-                </ModalSwiper>
+                    ))}
+                  </div>
+                </MobileImageViewer>
               </ModalGallery>
             </ModalContent>
           </ModalOverlay>
