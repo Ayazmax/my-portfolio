@@ -139,6 +139,7 @@ const MobileMenu = styled(motion.div)`
   z-index: 999;
   /* Ensure proper scrolling on mobile */
   -webkit-overflow-scrolling: touch;
+  data-mobile-menu: true; /* Added data attribute for click outside handler */
 
   @media (max-width: 480px) {
     padding: 0.75rem 0;
@@ -186,18 +187,18 @@ const Header = ({ currentSection }) => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    const handleClickOutside = (event) => {
-      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isMobileMenuOpen]);
 
@@ -218,12 +219,55 @@ const Header = ({ currentSection }) => {
       const scrollOffset = isMobile ? 80 : 0;
       
       const elementPosition = element.offsetTop - scrollOffset;
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
+      
+      // Add debugging for mobile
+      console.log(`Scrolling to ${sectionId}:`, {
+        elementPosition,
+        scrollOffset,
+        isMobile,
+        windowWidth: window.innerWidth
       });
+      
+      // Force close mobile menu first
+      setIsMobileMenuOpen(false);
+      
+      // Add small delay for mobile to prevent accidental touches
+      const delay = isMobile ? 100 : 0;
+      
+      setTimeout(() => {
+        // Use requestAnimationFrame for smoother scrolling on mobile
+        requestAnimationFrame(() => {
+          try {
+            // Try smooth scrolling first
+            window.scrollTo({
+              top: elementPosition,
+              behavior: 'smooth'
+            });
+            
+            // Fallback for mobile if smooth scrolling doesn't work
+            if (isMobile) {
+              setTimeout(() => {
+                const currentScroll = window.pageYOffset;
+                const targetScroll = elementPosition;
+                const distance = targetScroll - currentScroll;
+                
+                // If smooth scroll didn't work, use instant scroll
+                if (Math.abs(currentScroll - targetScroll) > 10) {
+                  console.log('Fallback scroll for mobile');
+                  window.scrollTo(0, targetScroll);
+                }
+              }, 100);
+            }
+          } catch (error) {
+            console.error('Scroll error:', error);
+            // Fallback to instant scroll
+            window.scrollTo(0, elementPosition);
+          }
+        });
+      }, delay);
+    } else {
+      console.error(`Element with id "${sectionId}" not found`);
     }
-    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -260,7 +304,7 @@ const Header = ({ currentSection }) => {
         </NavLinks>
 
         <MobileMenuButton 
-          className="mobile-menu-container"
+          className="mobile-menu-button"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <FiX /> : <FiMenu />}
@@ -270,7 +314,6 @@ const Header = ({ currentSection }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <MobileMenu
-            className="mobile-menu-container"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -281,7 +324,7 @@ const Header = ({ currentSection }) => {
                 key={item.id}
                 className={currentSection === item.id ? 'active' : ''}
                 onClick={() => scrollToSection(item.id)}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
               >

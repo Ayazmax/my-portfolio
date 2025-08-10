@@ -70,7 +70,10 @@ const App = () => {
           transition={{ duration: 0.8 }}
         >
           <Header currentSection={currentSection} />
-          <main>
+          <main style={{ 
+            WebkitOverflowScrolling: 'touch',
+            overflowX: 'hidden'
+          }}>
             <Hero />
             <About />
             <Skills />

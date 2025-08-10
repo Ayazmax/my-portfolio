@@ -27,6 +27,8 @@ html {
   scroll-behavior: smooth;
   /* Ensure proper scrolling on mobile */
   -webkit-overflow-scrolling: touch;
+  /* Prevent zoom on input focus for mobile */
+  touch-action: manipulation;
 }
 
 body {
@@ -41,6 +43,8 @@ body {
   /* Ensure proper scrolling on mobile */
   -webkit-overflow-scrolling: touch;
   overflow-x: hidden;
+  /* Prevent body scroll when modal is open */
+  position: relative;
 }
 
 code {
