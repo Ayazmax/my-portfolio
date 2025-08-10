@@ -737,7 +737,6 @@ const Projects = () => {
       setCurrentImageIndex((prev) => 
         prev === selectedProject.images.length - 1 ? 0 : prev + 1
       );
-      showThumbnailsTemporarily();
     }
   };
 
@@ -746,13 +745,11 @@ const Projects = () => {
       setCurrentImageIndex((prev) => 
         prev === 0 ? selectedProject.images.length - 1 : prev - 1
       );
-      showThumbnailsTemporarily();
     }
   };
 
   const goToImage = (index) => {
     setCurrentImageIndex(index);
-    showThumbnailsTemporarily();
   };
 
   // Keyboard navigation
