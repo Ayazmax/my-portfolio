@@ -564,7 +564,6 @@ const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [showThumbnails, setShowThumbnails] = useState(false);
   const [thumbnailTimer, setThumbnailTimer] = useState(null);
-  const [lastTap, setLastTap] = useState(0);
 
   const filters = [
     { id: 'all', label: 'All Projects', icon: <FiCode /> },
@@ -827,14 +826,12 @@ const Projects = () => {
 
   // Function to show thumbnails temporarily
   const showThumbnailsTemporarily = () => {
-    const now = Date.now();
-    const DOUBLE_TAP_DELAY = 300;
-    
-    if (now - lastTap < DOUBLE_TAP_DELAY) {
-      // Double tap - hide thumbnails immediately
+    // Single tap - toggle thumbnails visibility
+    if (showThumbnails) {
+      // If thumbnails are visible, hide them immediately
       hideThumbnails();
     } else {
-      // Single tap - show thumbnails temporarily
+      // If thumbnails are hidden, show them temporarily
       setShowThumbnails(true);
       
       // Clear existing timer
@@ -850,8 +847,6 @@ const Projects = () => {
       
       setThumbnailTimer(timer);
     }
-    
-    setLastTap(now);
   };
 
   // Function to hide thumbnails immediately
@@ -1027,7 +1022,7 @@ const Projects = () => {
                                   pointerEvents: 'none'
                                 }}
                               >
-                                Tap to show navigation
+                                Tap to toggle navigation
                               </motion.div>
                             )}
                   

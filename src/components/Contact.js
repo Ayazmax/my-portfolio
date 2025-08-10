@@ -1,23 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiFacebook } from 'react-icons/fi';
+import { FiMail, FiPhone, FiMapPin, FiSend, FiGithub, FiLinkedin, FiFacebook, FiCheck, FiAlertCircle } from 'react-icons/fi';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 const ContactSection = styled.section`
   padding: 6rem 0;
   background: var(--bg-primary);
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const SectionHeader = styled(motion.div)`
   text-align: center;
   margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -26,6 +52,14 @@ const SectionTitle = styled.h2`
   color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
@@ -33,6 +67,14 @@ const SectionSubtitle = styled.p`
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+  }
 `;
 
 const ContactContent = styled.div`
@@ -44,6 +86,10 @@ const ContactContent = styled.div`
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
   }
 `;
 
@@ -59,6 +105,16 @@ const ContactTitle = styled.h3`
   color: var(--text-primary);
   margin-bottom: 2rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const ContactDescription = styled.p`
@@ -66,6 +122,16 @@ const ContactDescription = styled.p`
   line-height: 1.8;
   margin-bottom: 2rem;
   font-size: 1.1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const ContactItems = styled.div`
@@ -73,6 +139,11 @@ const ContactItems = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ContactItem = styled(motion.div)`
@@ -89,6 +160,11 @@ const ContactItem = styled(motion.div)`
     transform: translateX(5px);
     box-shadow: var(--shadow-md);
   }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
 `;
 
 const ContactIcon = styled.div`
@@ -102,6 +178,12 @@ const ContactIcon = styled.div`
   color: white;
   font-size: 1.2rem;
   flex-shrink: 0;
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
 `;
 
 const ContactDetails = styled.div`
@@ -113,16 +195,28 @@ const ContactLabel = styled.div`
   color: var(--text-primary);
   margin-bottom: 0.25rem;
   font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
 `;
 
 const ContactValue = styled.div`
   color: var(--text-secondary);
   font-size: 1rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const SocialLinks = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
 `;
 
 const SocialLink = styled(motion.a)`
@@ -143,6 +237,12 @@ const SocialLink = styled(motion.a)`
     color: white;
     transform: translateY(-3px);
   }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
 `;
 
 const ContactForm = styled(motion.form)`
@@ -154,6 +254,11 @@ const ContactForm = styled(motion.form)`
 
   @media (max-width: 768px) {
     order: 1;
+    padding: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem;
   }
 `;
 
@@ -163,10 +268,24 @@ const FormTitle = styled.h3`
   color: var(--text-primary);
   margin-bottom: 2rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
+
+  @media (max-width: 480px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const FormLabel = styled.label`
@@ -175,6 +294,11 @@ const FormLabel = styled.label`
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const FormInput = styled.input`
@@ -195,6 +319,11 @@ const FormInput = styled.input`
 
   &::placeholder {
     color: var(--text-light);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+    font-size: 0.95rem;
   }
 `;
 
@@ -220,6 +349,12 @@ const FormTextarea = styled.textarea`
   &::placeholder {
     color: var(--text-light);
   }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+    font-size: 0.95rem;
+    min-height: 100px;
+  }
 `;
 
 const SubmitButton = styled(motion.button)`
@@ -237,6 +372,7 @@ const SubmitButton = styled(motion.button)`
   justify-content: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
+  min-height: 44px;
 
   &:hover {
     background: var(--primary-dark);
@@ -248,6 +384,40 @@ const SubmitButton = styled(motion.button)`
     cursor: not-allowed;
     transform: none;
   }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+`;
+
+const StatusMessage = styled(motion.div)`
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+
+  @media (max-width: 480px) {
+    padding: 0.875rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+`;
+
+const SuccessMessage = styled(StatusMessage)`
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #22c55e;
+`;
+
+const ErrorMessage = styled(StatusMessage)`
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
 `;
 
 const Contact = () => {
@@ -264,6 +434,12 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', or null
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -276,18 +452,43 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus(null);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // EmailJS service configuration
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'ayazm9582@gmail.com'
+      };
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        templateParams,
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setSubmitStatus('error');
+    } finally {
       setIsSubmitting(false);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-      alert('Thank you for your message! I will get back to you soon.');
-    }, 2000);
+    }
   };
 
   const contactInfo = [
@@ -395,6 +596,27 @@ const Contact = () => {
             onSubmit={handleSubmit}
           >
             <FormTitle>Send Message</FormTitle>
+            
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <SuccessMessage
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <FiCheck />
+                Message sent successfully! I'll get back to you soon.
+              </SuccessMessage>
+            )}
+
+            {submitStatus === 'error' && (
+              <ErrorMessage
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <FiAlertCircle />
+                Failed to send message. Please try again or contact me directly at ayazm9582@gmail.com
+              </ErrorMessage>
+            )}
             
             <FormGroup>
               <FormLabel htmlFor="name">Name</FormLabel>
