@@ -440,9 +440,9 @@ const Contact = () => {
   ];
 
   const socialLinks = [
-    { icon: <FiGithub />, url: 'https://github.com/ayazm9582' },
-    { icon: <FiLinkedin />, url: 'https://linkedin.com/in/ayazm9582' },
-    { icon: <FiFacebook />, url: 'https://facebook.com/ayazm9582' }
+    { icon: <FiGithub />, url: 'https://github.com/Ayazmax' },
+    { icon: <FiLinkedin />, url: 'https://www.linkedin.com/in/mohomed-ayaz-b7632423b' },
+    { icon: <FiFacebook />, url: 'https://www.facebook.com/mohammed.ayaz.1042/' }
   ];
 
   return (
