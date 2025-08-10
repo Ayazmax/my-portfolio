@@ -25,6 +25,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Ensure proper scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -36,6 +38,9 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   line-height: 1.6;
+  /* Ensure proper scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
 }
 
 code {

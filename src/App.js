@@ -14,6 +14,8 @@ import LoadingScreen from './components/LoadingScreen';
 const AppContainer = styled.div`
   min-height: 100vh;
   overflow-x: hidden;
+  /* Ensure proper scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
 `;
 
 const App = () => {
@@ -32,7 +34,10 @@ const App = () => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['home', 'about', 'skills', 'projects', 'experience', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      // Adjust scroll offset for mobile devices
+      const isMobile = window.innerWidth <= 768;
+      const scrollOffset = isMobile ? 150 : 100;
+      const scrollPosition = window.scrollY + scrollOffset;
 
       for (const section of sections) {
         const element = document.getElementById(section);

@@ -35,6 +35,9 @@ const Logo = styled(motion.div)`
   color: var(--primary-color);
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
+  /* Ensure proper touch response on mobile */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   @media (max-width: 480px) {
     font-size: 1.25rem;
@@ -59,6 +62,9 @@ const NavLink = styled(motion.a)`
   padding: 0.5rem 0;
   cursor: pointer;
   transition: color 0.3s ease;
+  /* Ensure proper touch response on mobile */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     color: var(--primary-color);
@@ -98,6 +104,9 @@ const MobileMenuButton = styled.button`
   padding: 0.5rem;
   border-radius: 8px;
   transition: all 0.3s ease;
+  /* Ensure proper touch response on mobile */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background: rgba(139, 92, 246, 0.1);
@@ -127,6 +136,9 @@ const MobileMenu = styled(motion.div)`
   gap: 0.5rem;
   max-height: calc(100vh - 70px);
   overflow-y: auto;
+  z-index: 999;
+  /* Ensure proper scrolling on mobile */
+  -webkit-overflow-scrolling: touch;
 
   @media (max-width: 480px) {
     padding: 0.75rem 0;
@@ -143,6 +155,9 @@ const MobileNavLink = styled(motion.a)`
   transition: all 0.3s ease;
   border-left: 3px solid transparent;
   font-size: 1rem;
+  /* Ensure proper touch response on mobile */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
     background: rgba(139, 92, 246, 0.1);
@@ -171,9 +186,20 @@ const Header = ({ currentSection }) => {
       setIsScrolled(window.scrollY > 50);
     };
 
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu-container')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('click', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -187,7 +213,15 @@ const Header = ({ currentSection }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Adjust scroll offset for mobile devices
+      const isMobile = window.innerWidth <= 768;
+      const scrollOffset = isMobile ? 80 : 0;
+      
+      const elementPosition = element.offsetTop - scrollOffset;
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     }
     setIsMobileMenuOpen(false);
   };
@@ -225,7 +259,10 @@ const Header = ({ currentSection }) => {
           ))}
         </NavLinks>
 
-        <MobileMenuButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+        <MobileMenuButton 
+          className="mobile-menu-container"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
           {isMobileMenuOpen ? <FiX /> : <FiMenu />}
         </MobileMenuButton>
       </NavContainer>
@@ -233,6 +270,7 @@ const Header = ({ currentSection }) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <MobileMenu
+            className="mobile-menu-container"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
