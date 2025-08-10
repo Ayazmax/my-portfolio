@@ -831,17 +831,8 @@ const Projects = () => {
     const DOUBLE_TAP_DELAY = 300;
     
     if (now - lastTap < DOUBLE_TAP_DELAY) {
-      // Double tap - toggle thumbnails
-      if (showThumbnails) {
-        hideThumbnails();
-      } else {
-        setShowThumbnails(true);
-        // Set timer to hide after 5 seconds for double-tap
-        const timer = setTimeout(() => {
-          setShowThumbnails(false);
-        }, 5000);
-        setThumbnailTimer(timer);
-      }
+      // Double tap - hide thumbnails immediately
+      hideThumbnails();
     } else {
       // Single tap - show thumbnails temporarily
       setShowThumbnails(true);
@@ -851,9 +842,10 @@ const Projects = () => {
         clearTimeout(thumbnailTimer);
       }
       
-      // Set new timer to hide thumbnails after 4 seconds (longer on mobile for better UX)
+      // Set new timer to hide thumbnails after 4 seconds
       const timer = setTimeout(() => {
         setShowThumbnails(false);
+        setThumbnailTimer(null);
       }, 4000);
       
       setThumbnailTimer(timer);
@@ -1122,21 +1114,20 @@ const Projects = () => {
                         transform: 'translateX(-50%)',
                         display: 'flex',
                         gap: '8px',
-                        flexWrap: 'wrap',
                         justifyContent: 'center',
-                        maxWidth: '90%',
+                        alignItems: 'center',
                         padding: '12px 16px',
                         background: 'rgba(0, 0, 0, 0.3)',
                         borderRadius: '20px',
                         backdropFilter: 'blur(10px)'
                       }}
                     >
-                      {selectedProject.images.map((image, index) => (
+                      {/* Previous image thumbnail */}
+                      {currentImageIndex > 0 && (
                         <motion.img
-                          key={index}
-                          src={image}
-                          alt={`Thumbnail ${index + 1}`}
-                          onClick={() => goToImage(index)}
+                          src={selectedProject.images[currentImageIndex - 1]}
+                          alt="Previous image"
+                          onClick={() => goToImage(currentImageIndex - 1)}
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
                           style={{
@@ -1145,12 +1136,50 @@ const Projects = () => {
                             objectFit: 'cover',
                             borderRadius: '6px',
                             cursor: 'pointer',
-                            border: index === currentImageIndex ? '2px solid var(--primary-color)' : '2px solid transparent',
-                          opacity: index === currentImageIndex ? 1 : 0.7,
-                            flexShrink: 0
+                            border: '2px solid rgba(255, 255, 255, 0.3)',
+                            opacity: 0.7
                           }}
                         />
-                      ))}
+                      )}
+                      
+                      {/* Current image indicator */}
+                      <div
+                        style={{
+                          width: '35px',
+                          height: '35px',
+                          borderRadius: '6px',
+                          border: '2px solid var(--primary-color)',
+                          background: 'var(--primary-color)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'white',
+                          fontSize: '12px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {currentImageIndex + 1}
+                      </div>
+                      
+                      {/* Next image thumbnail */}
+                      {currentImageIndex < selectedProject.images.length - 1 && (
+                        <motion.img
+                          src={selectedProject.images[currentImageIndex + 1]}
+                          alt="Next image"
+                          onClick={() => goToImage(currentImageIndex + 1)}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          style={{
+                            width: '35px',
+                            height: '35px',
+                            objectFit: 'cover',
+                            borderRadius: '6px',
+                            cursor: 'pointer',
+                            border: '2px solid rgba(255, 255, 255, 0.3)',
+                            opacity: 0.7
+                          }}
+                        />
+                      )}
                     </motion.div>
                   )}
                 </MobileImageViewer>
