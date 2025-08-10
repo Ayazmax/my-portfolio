@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { FiGithub, FiCode, FiSmartphone, FiMonitor, FiChevronLeft, FiChevronRight, FiX, FiImage } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import LazyImage from './LazyImage';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -529,10 +530,9 @@ const Projects = () => {
                   >
                     {project.images.map((image, imageIndex) => (
                       <SwiperSlide key={imageIndex}>
-                        <ProjectImage 
+                        <LazyImage 
                           src={image} 
                           alt={`${project.title} - Screenshot ${imageIndex + 1}`}
-                          loading="lazy"
                         />
                       </SwiperSlide>
                     ))}
@@ -615,7 +615,7 @@ const Projects = () => {
                 >
                   {selectedProject.images.map((image, imageIndex) => (
                     <SwiperSlide key={imageIndex}>
-                      <ModalImage 
+                      <LazyImage 
                         src={image} 
                         alt={`${selectedProject.title} - Screenshot ${imageIndex + 1}`}
                       />
