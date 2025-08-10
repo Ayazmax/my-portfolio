@@ -1008,7 +1008,7 @@ const Projects = () => {
                               onClick={showThumbnailsTemporarily}
                             />
                             
-                            {/* Tap hint when thumbnails are hidden */}
+                            {/* Tap hint when navigation is hidden */}
                             {!showThumbnails && (
                               <motion.div
                                 initial={{ opacity: 0 }}
@@ -1032,57 +1032,61 @@ const Projects = () => {
                             )}
                   
                   {/* Navigation Controls */}
-                  <motion.button
-                    onClick={prevImage}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    style={{
-                      position: 'absolute',
-                      left: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(139, 92, 246, 0.9)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '40px',
-                      height: '40px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      zIndex: 10,
-                      fontSize: '18px'
-                    }}
-                  >
-                    <FiChevronLeft />
-                  </motion.button>
-                  
-                  <motion.button
-                    onClick={nextImage}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    style={{
-                      position: 'absolute',
-                      right: '10px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'rgba(139, 92, 246, 0.9)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '50%',
-                      width: '40px',
-                      height: '40px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      zIndex: 10,
-                      fontSize: '18px'
-                    }}
-                  >
-                    <FiChevronRight />
-                  </motion.button>
+                  {showThumbnails && (
+                    <>
+                      <motion.button
+                        onClick={prevImage}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        style={{
+                          position: 'absolute',
+                          left: '10px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          background: 'rgba(139, 92, 246, 0.9)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: '40px',
+                          height: '40px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          zIndex: 10,
+                          fontSize: '18px'
+                        }}
+                      >
+                        <FiChevronLeft />
+                      </motion.button>
+                      
+                      <motion.button
+                        onClick={nextImage}
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        style={{
+                          position: 'absolute',
+                          right: '10px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          background: 'rgba(139, 92, 246, 0.9)',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '50%',
+                          width: '40px',
+                          height: '40px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          cursor: 'pointer',
+                          zIndex: 10,
+                          fontSize: '18px'
+                        }}
+                      >
+                        <FiChevronRight />
+                      </motion.button>
+                    </>
+                  )}
                   
                   {/* Image Counter */}
                   <div style={{
