@@ -426,13 +426,13 @@ const Projects = () => {
       technologies: ['Java 17', 'Java Swing', 'FlatLaf UI', 'SQLite', 'JDBC', 'Maven', 'MVC Pattern'],
       github: 'https://github.com/Ayazmax/360-POS',
       images: [
-        '/assets/360 POS/h1.png',
-        '/assets/360 POS/h2.png',
-        '/assets/360 POS/p1.png',
-        '/assets/360 POS/v1.png',
-        '/assets/360 POS/e1.png',
-        '/assets/360 POS/r1.png',
-        '/assets/360 POS/sales report.png'
+        '/assets/360 pos/h1.png',
+        '/assets/360 pos/h2.png',
+        '/assets/360 pos/p1.png',
+        '/assets/360 pos/v1.png',
+        '/assets/360 pos/e1.png',
+        '/assets/360 pos/r1.png',
+        '/assets/360 pos/sales report.png'
       ]
     },
     {
