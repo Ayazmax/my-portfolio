@@ -562,6 +562,9 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [showThumbnails, setShowThumbnails] = useState(false);
+  const [thumbnailTimer, setThumbnailTimer] = useState(null);
+  const [lastTap, setLastTap] = useState(0);
 
   const filters = [
     { id: 'all', label: 'All Projects', icon: <FiCode /> },
@@ -703,12 +706,31 @@ const Projects = () => {
     setSelectedProject(project);
     setCurrentImageIndex(0);
     setIsModalOpen(true);
+    setShowThumbnails(false);
+    if (thumbnailTimer) {
+      clearTimeout(thumbnailTimer);
+      setThumbnailTimer(null);
+    }
+    
+    // Show thumbnails briefly to indicate they exist
+    setTimeout(() => {
+      setShowThumbnails(true);
+      const timer = setTimeout(() => {
+        setShowThumbnails(false);
+      }, 2000);
+      setThumbnailTimer(timer);
+    }, 500);
   };
 
   const closeGallery = () => {
     setIsModalOpen(false);
     setSelectedProject(null);
     setCurrentImageIndex(0);
+    setShowThumbnails(false);
+    if (thumbnailTimer) {
+      clearTimeout(thumbnailTimer);
+      setThumbnailTimer(null);
+    }
   };
 
   const nextImage = () => {
@@ -716,6 +738,7 @@ const Projects = () => {
       setCurrentImageIndex((prev) => 
         prev === selectedProject.images.length - 1 ? 0 : prev + 1
       );
+      showThumbnailsTemporarily();
     }
   };
 
@@ -724,11 +747,13 @@ const Projects = () => {
       setCurrentImageIndex((prev) => 
         prev === 0 ? selectedProject.images.length - 1 : prev - 1
       );
+      showThumbnailsTemporarily();
     }
   };
 
   const goToImage = (index) => {
     setCurrentImageIndex(index);
+    showThumbnailsTemporarily();
   };
 
   // Keyboard navigation
@@ -762,6 +787,15 @@ const Projects = () => {
     };
   }, [isModalOpen]);
 
+  // Cleanup thumbnail timer on unmount
+  React.useEffect(() => {
+    return () => {
+      if (thumbnailTimer) {
+        clearTimeout(thumbnailTimer);
+      }
+    };
+  }, [thumbnailTimer]);
+
   // Touch gesture handling for mobile
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -789,6 +823,52 @@ const Projects = () => {
 
     setTouchStart(null);
     setTouchEnd(null);
+  };
+
+  // Function to show thumbnails temporarily
+  const showThumbnailsTemporarily = () => {
+    const now = Date.now();
+    const DOUBLE_TAP_DELAY = 300;
+    
+    if (now - lastTap < DOUBLE_TAP_DELAY) {
+      // Double tap - toggle thumbnails
+      if (showThumbnails) {
+        hideThumbnails();
+      } else {
+        setShowThumbnails(true);
+        // Set timer to hide after 5 seconds for double-tap
+        const timer = setTimeout(() => {
+          setShowThumbnails(false);
+        }, 5000);
+        setThumbnailTimer(timer);
+      }
+    } else {
+      // Single tap - show thumbnails temporarily
+      setShowThumbnails(true);
+      
+      // Clear existing timer
+      if (thumbnailTimer) {
+        clearTimeout(thumbnailTimer);
+      }
+      
+      // Set new timer to hide thumbnails after 4 seconds (longer on mobile for better UX)
+      const timer = setTimeout(() => {
+        setShowThumbnails(false);
+      }, 4000);
+      
+      setThumbnailTimer(timer);
+    }
+    
+    setLastTap(now);
+  };
+
+  // Function to hide thumbnails immediately
+  const hideThumbnails = () => {
+    setShowThumbnails(false);
+    if (thumbnailTimer) {
+      clearTimeout(thumbnailTimer);
+      setThumbnailTimer(null);
+    }
   };
 
   return (
@@ -929,11 +1009,35 @@ const Projects = () => {
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
                 >
-                  <ZoomableImage
-                    src={selectedProject.images[currentImageIndex]}
-                    alt={`${selectedProject.title} - Screenshot ${currentImageIndex + 1}`}
-                    draggable={false}
-                  />
+                                              <ZoomableImage
+                              src={selectedProject.images[currentImageIndex]}
+                              alt={`${selectedProject.title} - Screenshot ${currentImageIndex + 1}`}
+                              draggable={false}
+                              onClick={showThumbnailsTemporarily}
+                            />
+                            
+                            {/* Tap hint when thumbnails are hidden */}
+                            {!showThumbnails && (
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 0.7 }}
+                                style={{
+                                  position: 'absolute',
+                                  bottom: '20px',
+                                  left: '50%',
+                                  transform: 'translateX(-50%)',
+                                  background: 'rgba(0, 0, 0, 0.6)',
+                                  color: 'white',
+                                  padding: '8px 16px',
+                                  borderRadius: '20px',
+                                  fontSize: '12px',
+                                  fontWeight: '500',
+                                  pointerEvents: 'none'
+                                }}
+                              >
+                                Tap to show navigation
+                              </motion.div>
+                            )}
                   
                   {/* Navigation Controls */}
                   <motion.button
@@ -1005,39 +1109,50 @@ const Projects = () => {
                   </div>
                   
                   {/* Thumbnail Navigation */}
-                  <div style={{
-                    position: 'absolute',
-                    bottom: '50px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    display: 'flex',
-                    gap: '8px',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    maxWidth: '90%',
-                    padding: '0 10px'
-                  }}>
-                    {selectedProject.images.map((image, index) => (
-                      <motion.img
-                        key={index}
-                        src={image}
-                        alt={`Thumbnail ${index + 1}`}
-                        onClick={() => goToImage(index)}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        style={{
-                          width: '35px',
-                          height: '35px',
-                          objectFit: 'cover',
-                          borderRadius: '6px',
-                          cursor: 'pointer',
-                          border: index === currentImageIndex ? '2px solid var(--primary-color)' : '2px solid transparent',
+                  {showThumbnails && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ duration: 0.3 }}
+                      style={{
+                        position: 'absolute',
+                        bottom: '50px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        display: 'flex',
+                        gap: '8px',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        maxWidth: '90%',
+                        padding: '12px 16px',
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        borderRadius: '20px',
+                        backdropFilter: 'blur(10px)'
+                      }}
+                    >
+                      {selectedProject.images.map((image, index) => (
+                        <motion.img
+                          key={index}
+                          src={image}
+                          alt={`Thumbnail ${index + 1}`}
+                          onClick={() => goToImage(index)}
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          style={{
+                            width: '35px',
+                            height: '35px',
+                            objectFit: 'cover',
+                            borderRadius: '6px',
+                            cursor: 'pointer',
+                            border: index === currentImageIndex ? '2px solid var(--primary-color)' : '2px solid transparent',
                           opacity: index === currentImageIndex ? 1 : 0.7,
-                          flexShrink: 0
-                        }}
-                      />
-                    ))}
-                  </div>
+                            flexShrink: 0
+                          }}
+                        />
+                      ))}
+                    </motion.div>
+                  )}
                 </MobileImageViewer>
               </ModalGallery>
             </ModalContent>

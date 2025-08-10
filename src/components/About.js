@@ -371,6 +371,15 @@ const About = () => {
               transition={{ duration: 0.6, delay: 0.8 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/assets/cv/Mohomed-Ayaz-CV.pdf';
+                link.download = 'Mohomed-Ayaz-CV.pdf';
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
             >
               <FiDownload />
               Download Resume
