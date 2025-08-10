@@ -15,17 +15,41 @@ import 'swiper/css/pagination';
 const ProjectsSection = styled.section`
   padding: 6rem 0;
   background: var(--bg-primary);
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const SectionHeader = styled(motion.div)`
   text-align: center;
   margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2.5rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -34,6 +58,15 @@ const SectionTitle = styled.h2`
   color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
@@ -41,6 +74,10 @@ const SectionSubtitle = styled.p`
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const FilterButtons = styled(motion.div)`
@@ -49,6 +86,17 @@ const FilterButtons = styled(motion.div)`
   gap: 1rem;
   margin-bottom: 3rem;
   flex-wrap: wrap;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
 `;
 
 const FilterButton = styled(motion.button)`
@@ -66,12 +114,33 @@ const FilterButton = styled(motion.button)`
     border-color: var(--primary-color);
     transform: translateY(-2px);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    min-width: 80px;
+  }
 `;
 
 const ProjectsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -89,6 +158,14 @@ const ProjectCard = styled(motion.div)`
     transform: translateY(-10px);
     box-shadow: var(--shadow-xl);
   }
+
+  @media (max-width: 480px) {
+    border-radius: 12px;
+    
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
 `;
 
 const ProjectGallery = styled.div`
@@ -96,6 +173,10 @@ const ProjectGallery = styled.div`
   position: relative;
   overflow: hidden;
   background: var(--bg-primary);
+
+  @media (max-width: 480px) {
+    height: 200px;
+  }
 `;
 
 const StyledSwiper = styled(Swiper)`
@@ -121,6 +202,15 @@ const StyledSwiper = styled(Swiper)`
       font-size: 16px;
       font-weight: bold;
     }
+
+    @media (max-width: 480px) {
+      width: 35px;
+      height: 35px;
+      
+      &::after {
+        font-size: 14px;
+      }
+    }
   }
 
   .swiper-pagination-bullet {
@@ -145,6 +235,10 @@ const ProjectContent = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
+
+  @media (max-width: 480px) {
+    padding: 1.25rem;
+  }
 `;
 
 const ProjectTitle = styled.h3`
@@ -153,6 +247,11 @@ const ProjectTitle = styled.h3`
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const ProjectDescription = styled.p`
@@ -161,6 +260,12 @@ const ProjectDescription = styled.p`
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
   flex: 1;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
 `;
 
 const ProjectTech = styled.div`
@@ -168,6 +273,11 @@ const ProjectTech = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1.5rem;
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
 `;
 
 const TechTag = styled.span`
@@ -178,6 +288,11 @@ const TechTag = styled.span`
   font-size: 0.8rem;
   font-weight: 500;
   border: 1px solid var(--border-color);
+
+  @media (max-width: 480px) {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+  }
 `;
 
 const ProjectLinks = styled.div`
@@ -185,6 +300,11 @@ const ProjectLinks = styled.div`
   gap: 1rem;
   justify-content: flex-end;
   margin-top: auto;
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+    flex-direction: column;
+  }
 `;
 
 const ProjectLink = styled(motion.button)`
@@ -207,6 +327,18 @@ const ProjectLink = styled(motion.button)`
     background: ${props => props.variant === 'secondary' ? 'var(--bg-secondary)' : 'var(--primary-dark)'};
     transform: translateY(-2px);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    justify-content: center;
+    width: 100%;
+  }
 `;
 
 // Modal Styles
@@ -222,6 +354,14 @@ const ModalOverlay = styled(motion.div)`
   justify-content: center;
   z-index: 1000;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 const ModalContent = styled(motion.div)`
@@ -232,6 +372,12 @@ const ModalContent = styled(motion.div)`
   overflow: hidden;
   position: relative;
   border: 1px solid var(--border-color);
+
+  @media (max-width: 480px) {
+    border-radius: 12px;
+    max-width: 95vw;
+    max-height: 95vh;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -240,6 +386,10 @@ const ModalHeader = styled.div`
   align-items: center;
   padding: 1.5rem;
   border-bottom: 1px solid var(--border-color);
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const ModalTitle = styled.h3`
@@ -247,6 +397,10 @@ const ModalTitle = styled.h3`
   font-weight: 600;
   color: var(--text-primary);
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const CloseButton = styled(motion.button)`
@@ -263,11 +417,24 @@ const CloseButton = styled(motion.button)`
     background: var(--bg-secondary);
     color: var(--text-primary);
   }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    padding: 0.4rem;
+  }
 `;
 
 const ModalGallery = styled.div`
   height: 70vh;
   position: relative;
+
+  @media (max-width: 768px) {
+    height: 60vh;
+  }
+
+  @media (max-width: 480px) {
+    height: 50vh;
+  }
 `;
 
 const ModalSwiper = styled(Swiper)`
@@ -292,6 +459,15 @@ const ModalSwiper = styled(Swiper)`
     &::after {
       font-size: 20px;
       font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+      width: 40px;
+      height: 40px;
+      
+      &::after {
+        font-size: 16px;
+      }
     }
   }
 

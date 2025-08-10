@@ -18,11 +18,15 @@ const HeaderContainer = styled(motion.header)`
 const NavContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
+
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+  }
 `;
 
 const Logo = styled(motion.div)`
@@ -31,6 +35,10 @@ const Logo = styled(motion.div)`
   color: var(--primary-color);
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
 `;
 
 const NavLinks = styled.nav`
@@ -87,9 +95,21 @@ const MobileMenuButton = styled.button`
   font-size: 1.5rem;
   color: var(--text-primary);
   cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(139, 92, 246, 0.1);
+  }
 
   @media (max-width: 768px) {
     display: block;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+    padding: 0.4rem;
   }
 `;
 
@@ -104,25 +124,41 @@ const MobileMenu = styled(motion.div)`
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+
+  @media (max-width: 480px) {
+    padding: 0.75rem 0;
+    gap: 0.25rem;
+  }
 `;
 
 const MobileNavLink = styled(motion.a)`
   color: var(--text-secondary);
   font-weight: 500;
   text-decoration: none;
-  padding: 0.75rem 2rem;
+  padding: 1rem 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  font-size: 1rem;
 
   &:hover {
-    background: var(--bg-secondary);
+    background: rgba(139, 92, 246, 0.1);
     color: var(--primary-color);
+    border-left-color: var(--primary-color);
   }
 
   &.active {
     color: var(--primary-color);
-    background: var(--bg-secondary);
+    background: rgba(139, 92, 246, 0.1);
+    border-left-color: var(--primary-color);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
   }
 `;
 

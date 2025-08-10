@@ -28,6 +28,10 @@ const Shape = styled(motion.div)`
   position: absolute;
   background: rgba(139, 92, 246, 0.1);
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const HeroContent = styled.div`
@@ -38,6 +42,14 @@ const HeroContent = styled.div`
   color: white;
   position: relative;
   z-index: 2;
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Greeting = styled(motion.h2)`
@@ -46,22 +58,37 @@ const Greeting = styled(motion.h2)`
   margin-bottom: 1rem;
   opacity: 0.9;
   font-family: 'Inter', sans-serif;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Name = styled(motion.h1)`
-  font-size: clamp(3rem, 8vw, 5rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 800;
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
   line-height: 1.1;
+
+  @media (max-width: 480px) {
+    font-size: clamp(2rem, 10vw, 2.5rem);
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Title = styled(motion.h2)`
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.25rem, 4vw, 2.5rem);
   font-weight: 600;
   margin-bottom: 2rem;
   opacity: 0.9;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 480px) {
+    font-size: clamp(1rem, 5vw, 1.25rem);
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Description = styled(motion.p)`
@@ -70,6 +97,17 @@ const Description = styled(motion.p)`
   margin: 0 auto 3rem;
   opacity: 0.8;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+  }
 `;
 
 const CTAButtons = styled(motion.div)`
@@ -78,6 +116,13 @@ const CTAButtons = styled(motion.div)`
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 4rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
 `;
 
 const PrimaryButton = styled(motion.button)`
@@ -91,11 +136,18 @@ const PrimaryButton = styled(motion.button)`
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-lg);
+  min-width: 160px;
 
   &:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-xl);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+    min-width: 140px;
   }
 `;
 
@@ -109,11 +161,18 @@ const SecondaryButton = styled(motion.button)`
   border: 2px solid white;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 160px;
 
   &:hover {
     background: white;
     color: var(--primary-color);
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+    min-width: 140px;
   }
 `;
 
@@ -122,6 +181,11 @@ const SocialLinks = styled(motion.div)`
   gap: 1.5rem;
   justify-content: center;
   margin-bottom: 3rem;
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
 `;
 
 const SocialLink = styled(motion.a)`
@@ -143,6 +207,12 @@ const SocialLink = styled(motion.a)`
     color: white;
     transform: translateY(-3px);
   }
+
+  @media (max-width: 480px) {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
 `;
 
 const ScrollIndicator = styled(motion.div)`
@@ -157,11 +227,20 @@ const ScrollIndicator = styled(motion.div)`
   cursor: pointer;
   color: white;
   opacity: 0.7;
+
+  @media (max-width: 480px) {
+    bottom: 1.5rem;
+    gap: 0.25rem;
+  }
 `;
 
 const ScrollText = styled.span`
   font-size: 0.9rem;
   font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Hero = () => {

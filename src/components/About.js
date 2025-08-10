@@ -7,17 +7,41 @@ import { FiDownload, FiAward, FiUsers, FiCode } from 'react-icons/fi';
 const AboutSection = styled.section`
   padding: 6rem 0;
   background: var(--bg-primary);
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 1rem;
+  }
 `;
 
 const SectionHeader = styled(motion.div)`
   text-align: center;
   margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2.5rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -26,6 +50,15 @@ const SectionTitle = styled.h2`
   color: var(--text-primary);
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const SectionSubtitle = styled.p`
@@ -33,6 +66,10 @@ const SectionSubtitle = styled.p`
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const AboutContent = styled.div`
@@ -46,6 +83,10 @@ const AboutContent = styled.div`
     grid-template-columns: 1fr;
     gap: 2rem;
     min-height: auto;
+  }
+
+  @media (max-width: 480px) {
+    gap: 1.5rem;
   }
 `;
 
@@ -61,6 +102,16 @@ const AboutTitle = styled.h3`
   color: var(--text-primary);
   margin-bottom: 1.5rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const AboutDescription = styled.p`
@@ -68,6 +119,18 @@ const AboutDescription = styled.p`
   color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
 `;
 
 const AboutStats = styled.div`
@@ -75,6 +138,11 @@ const AboutStats = styled.div`
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const StatItem = styled(motion.div)`
@@ -83,12 +151,21 @@ const StatItem = styled(motion.div)`
   background: var(--bg-card);
   border-radius: 12px;
   border: 1px solid var(--border-color);
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 `;
 
 const StatIcon = styled.div`
   font-size: 2rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const StatNumber = styled.div`
@@ -97,12 +174,21 @@ const StatNumber = styled.div`
   color: var(--text-primary);
   margin-bottom: 0.5rem;
   font-family: 'Poppins', sans-serif;
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
 `;
 
 const StatLabel = styled.div`
   font-size: 0.9rem;
   color: var(--text-secondary);
   font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const DownloadButton = styled(motion.button)`
@@ -125,6 +211,13 @@ const DownloadButton = styled(motion.button)`
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
   }
+
+  @media (max-width: 480px) {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const AboutImage = styled(motion.div)`
@@ -139,6 +232,10 @@ const AboutImage = styled(motion.div)`
     order: 1;
     min-height: 400px;
   }
+
+  @media (max-width: 480px) {
+    min-height: 350px;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -149,6 +246,15 @@ const ImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: transparent;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 300px;
+  }
 `;
 
 const ProfileImage = styled.img`
@@ -158,6 +264,10 @@ const ProfileImage = styled.img`
   position: relative;
   z-index: 2;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.2));
+
+  @media (max-width: 480px) {
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+  }
 `;
 
 const About = () => {
