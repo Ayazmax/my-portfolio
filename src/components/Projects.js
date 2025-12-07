@@ -963,15 +963,17 @@ const Projects = () => {
                     ))}
                   </ProjectTech>
                   <ProjectLinks>
-                    <ProjectLink
-                      variant="secondary"
-                      onClick={() => openGallery(project)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FiImage />
-                      View Gallery
-                    </ProjectLink>
+                    {!project.recent && (
+                      <ProjectLink
+                        variant="secondary"
+                        onClick={() => openGallery(project)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FiImage />
+                        View Gallery
+                      </ProjectLink>
+                    )}
                     {project.live && (
                       <ProjectLink
                         as="a"
@@ -985,17 +987,19 @@ const Projects = () => {
                         Live Demo
                       </ProjectLink>
                     )}
-                    <ProjectLink
-                      as="a"
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FiGithub />
-                      View Code
-                    </ProjectLink>
+                    {!project.recent && (
+                      <ProjectLink
+                        as="a"
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FiGithub />
+                        View Code
+                      </ProjectLink>
+                    )}
                   </ProjectLinks>
                 </ProjectContent>
               </ProjectCard>
