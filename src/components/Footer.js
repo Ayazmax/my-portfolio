@@ -165,13 +165,6 @@ const Footer = () => {
         <FooterBottom>
           <Copyright>
             <span>© {currentYear} Mohomed Ayaz. All rights reserved.</span>
-            <span>Made with</span>
-            <HeartIcon
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <FiHeart />
-            </HeartIcon>
           </Copyright>
         </FooterBottom>
       </Container>
