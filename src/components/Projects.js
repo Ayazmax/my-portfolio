@@ -577,7 +577,7 @@ const Projects = () => {
     {
       id: 8,
       title: "Burly's Fast Food",
-      description: "Burly's Restaurant is a comprehensive fast food e-commerce website designed to provide customers with a seamless online ordering experience. The platform features an intuitive menu browsing system, shopping cart functionality, and secure checkout process. Customers can easily add items to their cart, apply promotional codes, and complete their orders with multiple payment options. The website includes special promotion sections, featured items, and a user-friendly interface optimized for both desktop and mobile devices. Built with modern web technologies, it ensures fast loading times and smooth user experience for hungry customers looking for quick and delicious meals.",
+      description: "A comprehensive fast food e-commerce website with online ordering, shopping cart, and secure checkout. Features menu browsing, promotional codes, and multiple payment options.",
       category: 'web',
       recent: true,
       technologies: ['React', 'E-commerce', 'Shopping Cart', 'Payment Integration', 'Responsive Design', 'Fast Food', 'Promotions', 'Checkout System'],
@@ -590,7 +590,7 @@ const Projects = () => {
     {
       id: 9,
       title: 'Madeena Restaurant',
-      description: 'Madeena Restaurant is a beautifully designed website that captures the essence of authentic cuisine and warm hospitality. The website features multiple pages including Home, Menu, Reservations, Reviews, and Contact sections. Built with Next.js, it provides a modern, responsive experience that works seamlessly across all devices. The site showcases featured dishes with elegant presentation, includes customer testimonials, displays restaurant hours and location information, and provides easy access to make reservations. The design emphasizes the restaurant\'s traditional values while presenting a contemporary digital presence that attracts and engages customers.',
+      description: 'A beautifully designed restaurant website built with Next.js featuring menu, reservations, reviews, and contact sections. Showcases featured dishes and customer testimonials with a modern, responsive design.',
       category: 'web',
       recent: true,
       technologies: ['Next.js', 'React', 'Responsive Design', 'Modern UI/UX', 'Restaurant Website', 'Reservation System', 'Menu Display', 'Customer Reviews'],
@@ -603,7 +603,7 @@ const Projects = () => {
     {
       id: 10,
       title: 'Luminary Beauty',
-      description: 'Luminary Beauty is a sophisticated e-commerce platform designed specifically for cosmetic and beauty products. The website features a stunning, modern design that reflects the elegance and quality of beauty products. Built with React, it offers a seamless shopping experience with advanced product filtering, detailed product views, shopping cart functionality, and secure checkout processes. The platform includes user accounts, wishlist features, product reviews, and responsive design that works perfectly across all devices. The elegant UI/UX design creates an immersive shopping experience that encourages customers to explore and purchase beauty products.',
+      description: 'A sophisticated e-commerce platform for cosmetics and beauty products. Features product catalog, shopping cart, user accounts, wishlist, and product reviews with a modern, elegant design.',
       category: 'web',
       recent: true,
       technologies: ['React', 'E-commerce', 'Responsive Design', 'Product Catalog', 'Shopping Cart', 'User Accounts', 'Modern UI/UX', 'Beauty Industry'],
