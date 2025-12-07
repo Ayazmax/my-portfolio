@@ -588,6 +588,19 @@ const Projects = () => {
       ]
     },
     {
+      id: 9,
+      title: 'Madeena Restaurant',
+      description: 'Madeena Restaurant is a beautifully designed website that captures the essence of authentic cuisine and warm hospitality. The website features multiple pages including Home, Menu, Reservations, Reviews, and Contact sections. Built with Next.js, it provides a modern, responsive experience that works seamlessly across all devices. The site showcases featured dishes with elegant presentation, includes customer testimonials, displays restaurant hours and location information, and provides easy access to make reservations. The design emphasizes the restaurant\'s traditional values while presenting a contemporary digital presence that attracts and engages customers.',
+      category: 'web',
+      recent: true,
+      technologies: ['Next.js', 'React', 'Responsive Design', 'Modern UI/UX', 'Restaurant Website', 'Reservation System', 'Menu Display', 'Customer Reviews'],
+      github: 'https://github.com/Ayazmax',
+      live: 'https://madeena.dreamware.lk/',
+      images: [
+        '/assets/madeena_restaurent/madeena.png'
+      ]
+    },
+    {
       id: 1,
       title: 'Milk Supply Prediction System',
       description: 'A web application to predict milk supply and consumption with decision-making capabilities. Features charts and tables showing monthly predictions.',
