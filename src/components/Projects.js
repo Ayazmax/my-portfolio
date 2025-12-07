@@ -601,6 +601,38 @@ const Projects = () => {
       ]
     },
     {
+      id: 10,
+      title: 'Luminary Beauty',
+      description: 'Luminary Beauty is a sophisticated e-commerce platform designed specifically for cosmetic and beauty products. The website features a stunning, modern design that reflects the elegance and quality of beauty products. Built with React, it offers a seamless shopping experience with advanced product filtering, detailed product views, shopping cart functionality, and secure checkout processes. The platform includes user accounts, wishlist features, product reviews, and responsive design that works perfectly across all devices. The elegant UI/UX design creates an immersive shopping experience that encourages customers to explore and purchase beauty products.',
+      category: 'web',
+      recent: true,
+      technologies: ['React', 'E-commerce', 'Responsive Design', 'Product Catalog', 'Shopping Cart', 'User Accounts', 'Modern UI/UX', 'Beauty Industry'],
+      github: 'https://github.com/Ayazmax',
+      live: 'https://cosmetics.dreamware.lk/Luminary_Beauty/',
+      images: [
+        '/assets/cosmetics/luminary-beauty.png'
+      ]
+    },
+    {
+      id: 11,
+      title: 'BudgetPOS - Desktop POS System',
+      description: 'A desktop Point of Sale application for small businesses with offline-first architecture. Built with React, Electron, and SQLite. Features include product management, sales processing, receipt printing, and comprehensive analytics. (In development)',
+      category: 'web',
+      recent: true,
+      showGallery: true,
+      technologies: ['React', 'Electron', 'Node.js', 'SQLite', 'Tailwind CSS', 'Recharts'],
+      github: 'https://github.com/Ayazmax',
+      images: [
+        '/assets/BusgetPOS/pos.png',
+        '/assets/BusgetPOS/product management.png',
+        '/assets/BusgetPOS/category management.png',
+        '/assets/BusgetPOS/general settings.png',
+        '/assets/BusgetPOS/data and storage settings.png',
+        '/assets/BusgetPOS/report.png',
+        '/assets/BusgetPOS/report2.png'
+      ]
+    },
+    {
       id: 1,
       title: 'Milk Supply Prediction System',
       description: 'A web application to predict milk supply and consumption with decision-making capabilities. Features charts and tables showing monthly predictions.',
@@ -963,7 +995,7 @@ const Projects = () => {
                     ))}
                   </ProjectTech>
                   <ProjectLinks>
-                    {!project.recent && (
+                    {(!project.recent || project.showGallery) && (
                       <ProjectLink
                         variant="secondary"
                         onClick={() => openGallery(project)}
