@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiGithub, FiCode, FiSmartphone, FiMonitor, FiChevronLeft, FiChevronRight, FiX, FiImage } from 'react-icons/fi';
+import { FiGithub, FiCode, FiSmartphone, FiMonitor, FiChevronLeft, FiChevronRight, FiX, FiImage, FiStar, FiExternalLink } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import LazyImage from './LazyImage';
@@ -558,7 +558,7 @@ const Projects = () => {
     threshold: 0.1,
   });
 
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('recent');
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -566,6 +566,7 @@ const Projects = () => {
   const [thumbnailTimer, setThumbnailTimer] = useState(null);
 
   const filters = [
+    { id: 'recent', label: 'Recent Projects', icon: <FiStar /> },
     { id: 'all', label: 'All Projects', icon: <FiCode /> },
     { id: 'web', label: 'Web Apps', icon: <FiMonitor /> },
     { id: 'mobile', label: 'Mobile Apps', icon: <FiSmartphone /> },
@@ -573,6 +574,19 @@ const Projects = () => {
   ];
 
   const projects = [
+    {
+      id: 8,
+      title: "Burly's Fast Food",
+      description: "Burly's Restaurant is a comprehensive fast food e-commerce website designed to provide customers with a seamless online ordering experience. The platform features an intuitive menu browsing system, shopping cart functionality, and secure checkout process. Customers can easily add items to their cart, apply promotional codes, and complete their orders with multiple payment options. The website includes special promotion sections, featured items, and a user-friendly interface optimized for both desktop and mobile devices. Built with modern web technologies, it ensures fast loading times and smooth user experience for hungry customers looking for quick and delicious meals.",
+      category: 'web',
+      recent: true,
+      technologies: ['React', 'E-commerce', 'Shopping Cart', 'Payment Integration', 'Responsive Design', 'Fast Food', 'Promotions', 'Checkout System'],
+      github: 'https://github.com/Ayazmax',
+      live: 'https://burleys.dreamware.lk/',
+      images: [
+        '/assets/Burly\'s Fast food/burly\'s.png'
+      ]
+    },
     {
       id: 1,
       title: 'Milk Supply Prediction System',
@@ -699,6 +713,8 @@ const Projects = () => {
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 
+    : activeFilter === 'recent'
+    ? projects.filter(project => project.recent === true)
     : projects.filter(project => project.category === activeFilter);
 
   const openGallery = (project) => {
@@ -943,6 +959,19 @@ const Projects = () => {
                       <FiImage />
                       View Gallery
                     </ProjectLink>
+                    {project.live && (
+                      <ProjectLink
+                        as="a"
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FiExternalLink />
+                        Live Demo
+                      </ProjectLink>
+                    )}
                     <ProjectLink
                       as="a"
                       href={project.github}
