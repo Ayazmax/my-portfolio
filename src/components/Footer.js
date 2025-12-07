@@ -172,7 +172,6 @@ const Footer = () => {
             >
               <FiHeart />
             </HeartIcon>
-            <span>using React & Framer Motion</span>
           </Copyright>
         </FooterBottom>
       </Container>
