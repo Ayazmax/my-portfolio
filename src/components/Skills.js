@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
-  FiCode, FiDatabase, FiSmartphone, FiZap,
+  FiCode, FiDatabase, FiZap,
   FiGitBranch, FiMonitor
 } from 'react-icons/fi';
 
@@ -176,42 +176,42 @@ const Skills = () => {
 
   const skillCategories = [
     {
+      title: 'Languages',
+      icon: <FiCode />,
+      skills: ['JavaScript', 'C#', 'PHP', 'Python', 'Dart', 'SQL']
+    },
+    {
       title: 'Frontend Development',
       icon: <FiMonitor />,
-      skills: ['React', 'JavaScript', 'HTML5', 'CSS3', 'MS Office Package', 'Internet Skills']
+      skills: ['React', 'Angular', 'HTML & CSS', 'React Native', 'Flutter']
     },
     {
       title: 'Backend Development',
-      icon: <FiCode />,
-      skills: ['Python', 'PHP', 'C#', 'Flask API', 'Firebase', 'MySQL']
-    },
-    {
-      title: 'Mobile Development',
-      icon: <FiSmartphone />,
-      skills: ['Flutter', 'Android Studio', 'Mobile App Development', 'Image Detection', 'NLP']
-    },
-    {
-      title: 'Specializations',
       icon: <FiDatabase />,
-      skills: ['React Web Development', 'Flutter Mobile Apps', 'Modern UI/UX Design', 'Performance Optimization']
+      skills: ['.NET', 'Node.js', 'REST APIs', 'Flask']
     },
     {
-      title: 'Tools & Platforms',
-      icon: <FiGitBranch />,
-      skills: ['Git', 'Heroku', 'Xampp Server', 'Sublime Text', 'Computer Hardware']
+      title: 'Databases',
+      icon: <FiDatabase />,
+      skills: ['MySQL', 'PostgreSQL', 'Firebase']
     },
     {
-      title: 'Other Skills',
+      title: 'Integrations',
       icon: <FiZap />,
-      skills: ['Software Test Automation', 'Full-Stack Development', 'Role-based Authentication', 'Charts & Analytics']
+      skills: ['OAuth 2.0', 'JWT', 'AWS Cognito', 'Twilio', 'Firebase Auth']
+    },
+    {
+      title: 'Cloud & Tools',
+      icon: <FiGitBranch />,
+      skills: ['AWS', 'Git', 'Heroku', 'Android Studio']
     }
   ];
 
   const progressSkills = [
+    { name: 'React & Angular', percentage: 90 },
     { name: 'Flutter & Mobile Development', percentage: 90 },
-    { name: 'React & JavaScript', percentage: 90 },
-    { name: 'Firebase & MySQL', percentage: 85 },
-    { name: 'PHP & C#', percentage: 70 }
+    { name: '.NET, Node.js & REST APIs', percentage: 85 },
+    { name: 'MySQL, PostgreSQL & Firebase', percentage: 85 }
   ];
 
   return (

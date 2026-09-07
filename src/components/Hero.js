@@ -245,7 +245,7 @@ const ScrollText = styled.span`
 
 const Hero = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const titles = ['Software Engineer', 'Full Stack Developer', 'Mobile App Developer', 'React & Flutter Specialist'];
+  const titles = ['Software Engineer', 'Full-Stack Web & Mobile', 'React & Flutter Developer', '.NET & Node.js Engineer'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -353,8 +353,8 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          A diligent individual capable of working autonomously and efficiently managing tasks. 
-          Skilled in adapting to diverse work environments and handling multiple responsibilities simultaneously.
+          Software Engineer with hands-on experience delivering full-stack web and mobile applications for business and enterprise clients.
+          Comfortable across React, Angular, .NET, Flutter, Node.js, and SQL databases.
         </Description>
 
         <CTAButtons
@@ -393,7 +393,7 @@ const Hero = () => {
             <FiGithub />
           </SocialLink>
           <SocialLink
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/mohomed-ayaz-b7632423b"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.1 }}

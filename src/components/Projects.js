@@ -575,6 +575,28 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 12,
+      title: 'Darbid',
+      description: 'A luxury auction mobile application designed to connect users with exclusive high-end products through a secure and real-time bidding experience. The platform enables seamless browsing, bidding, and winning of premium items with a smooth, user-friendly interface and real-time auction updates.',
+      category: 'mobile',
+      recent: true,
+      technologies: ['React', 'Node.js', 'MySQL', 'AWS', 'Firebase'],
+      images: [
+        '/assets/darbid/darbid.jpg'
+      ]
+    },
+    {
+      id: 13,
+      title: 'Primo Street Valet',
+      description: 'A smart valet parking solution designed to make parking simple, secure, and stress-free. Whether you’re visiting a hotel, hospital, mall, bank, university, or attending a special event, Primo Street Valet gives you full control of your parked vehicle.',
+      category: 'mobile',
+      recent: true,
+      technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS', 'Twilio IVR', 'Cognito OAuth', 'Firebase'],
+      images: [
+        '/assets/primo-valet/primo-valet.png'
+      ]
+    },
+    {
       id: 8,
       title: "Burly's Fast Food",
       description: "A comprehensive fast food e-commerce website with online ordering, shopping cart, and secure checkout. Features menu browsing, promotional codes, and multiple payment options.",

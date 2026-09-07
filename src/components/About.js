@@ -296,19 +296,18 @@ const About = () => {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <AboutTitle>Dedicated Software Engineer</AboutTitle>
+            <AboutTitle>Software Engineer | Full-Stack Web & Mobile</AboutTitle>
             <AboutDescription>
-              I'm a diligent individual capable of working autonomously and efficiently managing tasks. 
-              Skilled in adapting to diverse work environments and handling multiple responsibilities simultaneously. 
-              Enthusiastic about taking on new challenges and thriving in various situations.
+              Software Engineer with hands-on experience delivering full-stack web and mobile applications for business and enterprise clients.
+              Comfortable across React, Angular, .NET, Flutter, Node.js, and SQL databases, with production work covering APIs, authentication, and cloud services (AWS, Firebase).
             </AboutDescription>
             <AboutDescription>
-              With a BSc in Software Engineering from Kingston University and experience in full-stack development, 
-              mobile applications, and modern web technologies, I specialize in creating innovative solutions that make a real impact.
+              With a BSc in Software Engineering from Kingston University (Second Upper Class) and an HND from ESOFT Campus,
+              I focus on building reliable, user-centred products in collaborative, team-based delivery environments.
             </AboutDescription>
             <AboutDescription>
-              I am particularly specialized in creating React web applications and Flutter mobile applications, 
-              delivering high-quality, responsive, and user-friendly solutions across multiple platforms.
+              Currently working as a Full-Stack Software Engineer at Scroll Kuwait, with prior roles at SkyMax Solutions and ICT Option,
+              alongside ongoing freelance full-stack work for small-business clients.
             </AboutDescription>
 
             <AboutStats>
@@ -334,7 +333,7 @@ const About = () => {
                   <StatIcon>
                     <FiUsers />
                   </StatIcon>
-                  <StatNumber>2+</StatNumber>
+                  <StatNumber>3+</StatNumber>
                   <StatLabel>Years Experience</StatLabel>
                 </StatItem>
 
@@ -360,7 +359,7 @@ const About = () => {
                   <StatIcon>
                     <FiCode />
                   </StatIcon>
-                  <StatNumber>12+</StatNumber>
+                  <StatNumber>15+</StatNumber>
                   <StatLabel>Technologies</StatLabel>
                 </StatItem>
             </AboutStats>
@@ -373,8 +372,8 @@ const About = () => {
               whileTap={{ scale: 0.95 }}
               onClick={() => {
                 const link = document.createElement('a');
-                link.href = '/assets/cv/Mohomed-Ayaz-CV.pdf';
-                link.download = 'Mohomed-Ayaz-CV.pdf';
+                link.href = '/assets/cv/Mohomed_Ayaz_Software_Engineer_CV.pdf';
+                link.download = 'Mohomed_Ayaz_Software_Engineer_CV.pdf';
                 link.target = '_blank';
                 document.body.appendChild(link);
                 link.click();

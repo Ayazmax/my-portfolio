@@ -61,7 +61,7 @@ const LoadingScreen = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.8 }}
       >
-        <LoadingSubtext>Software Engineer</LoadingSubtext>
+        <LoadingSubtext>Software Engineer | Full-Stack Web & Mobile</LoadingSubtext>
       </motion.div>
       
       <LoadingBar>

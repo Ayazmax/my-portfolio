@@ -235,32 +235,42 @@ const Experience = () => {
   const experiences = [
     {
       id: 1,
-      title: 'Software Engineer',
-      company: 'SkyMax Solutions',
-      location: 'Sri Lanka',
-      period: '01/2025 - Present',
-      description: 'Building full-stack web applications, mobile applications and windows applications. Working on diverse projects using modern technologies and best practices.',
-      technologies: ['Flutter', 'React', 'Python', 'Firebase', 'C#', 'MySQL'],
+      title: 'Full-Stack Software Engineer',
+      company: 'Scroll Kuwait',
+      location: 'Kuwait',
+      period: 'Jan 2026 - Present',
+      description: 'Building end-to-end full-stack web applications as part of a delivery team. Main focus on backend development for industry-grade software systems, shipping production-ready features in a collaborative environment.',
+      technologies: ['.NET', 'Node.js', 'React', 'SQL', 'REST APIs', 'AWS'],
       link: '#'
     },
     {
       id: 2,
-      title: 'Software Developer',
-      company: 'ICT Option',
+      title: 'Associate Software Engineer',
+      company: 'SkyMax Solutions',
       location: 'Sri Lanka',
-      period: '05/2024 - 11/2024',
-      description: 'Built React frontends and Flutter mobile applications. Worked on modern web and mobile development projects using cutting-edge technologies.',
-      technologies: ['React', 'Flutter', 'JavaScript', 'Dart', 'TypeScript', 'CSS'],
+      period: 'Jan 2025 - Dec 2025',
+      description: 'Built end-to-end full-stack web applications using .NET, Angular, and MySQL for enterprise clients. Developed mobile applications with Flutter and Android Studio to improve customer engagement.',
+      technologies: ['.NET', 'Angular', 'MySQL', 'Flutter', 'Android Studio'],
       link: '#'
     },
     {
       id: 3,
-      title: 'Freelance Developer',
-      company: 'Self-Employed',
+      title: 'Software Developer',
+      company: 'ICT Option',
       location: 'Sri Lanka',
-      period: '01/2023 - Present',
-      description: 'Working independently on various projects including mobile apps, web applications, and AI/ML solutions. Managing client relationships and project delivery.',
-      technologies: ['Flutter', 'React', 'Python', 'Firebase', 'PHP', 'MySQL'],
+      period: 'May 2024 - Nov 2024',
+      description: 'Designed and implemented React frontends for enterprise-level applications. Developed cross-platform mobile applications using Flutter and integrated backend APIs, delivering scalable, user-friendly software within deadlines.',
+      technologies: ['React', 'Flutter', 'JavaScript', 'Dart', 'REST APIs'],
+      link: '#'
+    },
+    {
+      id: 4,
+      title: 'Freelance Full-Stack Developer',
+      company: 'Independent / Client Projects',
+      location: 'Sri Lanka',
+      period: 'Jan 2023 - Present',
+      description: 'Developed and deployed full-stack web applications using PHP, MySQL, and JavaScript for small-business clients. Built responsive UIs with HTML, CSS, React, and Flutter, and integrated Firebase authentication and real-time database.',
+      technologies: ['PHP', 'MySQL', 'JavaScript', 'React', 'Flutter', 'Firebase'],
       link: '#'
     }
   ];

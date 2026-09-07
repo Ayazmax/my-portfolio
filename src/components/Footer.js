@@ -131,8 +131,7 @@ const Footer = () => {
           >
             <FooterName>Mohomed Ayaz</FooterName>
             <FooterTagline>
-              Software Engineer passionate about creating innovative solutions and 
-              building exceptional user experiences.
+              Software Engineer | Full-Stack Web & Mobile — building reliable, user-centred products with React, Angular, .NET, Flutter, and Node.js.
             </FooterTagline>
           </FooterInfo>
 
