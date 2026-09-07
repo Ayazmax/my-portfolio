@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiHeart } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 
 const FooterContainer = styled.footer`
   background: var(--bg-dark);
@@ -102,12 +102,6 @@ const Copyright = styled.p`
     flex-direction: column;
     gap: 0.25rem;
   }
-`;
-
-const HeartIcon = styled(motion.div)`
-  color: #ef4444;
-  display: inline-flex;
-  align-items: center;
 `;
 
 const Footer = () => {

@@ -249,8 +249,7 @@ const Header = ({ currentSection }) => {
               setTimeout(() => {
                 const currentScroll = window.pageYOffset;
                 const targetScroll = elementPosition;
-                const distance = targetScroll - currentScroll;
-                
+
                 // If smooth scroll didn't work, use instant scroll
                 if (Math.abs(currentScroll - targetScroll) > 10) {
                   console.log('Fallback scroll for mobile');

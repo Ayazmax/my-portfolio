@@ -223,13 +223,6 @@ const StyledSwiper = styled(Swiper)`
   }
 `;
 
-const ProjectImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-`;
-
 const ProjectContent = styled.div`
   padding: 1.5rem;
   display: flex;
@@ -441,70 +434,6 @@ const ModalGallery = styled.div`
 
   @media (max-width: 480px) {
     height: 50vh;
-  }
-`;
-
-const ModalSwiper = styled(Swiper)`
-  height: 100%;
-  
-  .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--bg-primary);
-    overflow: hidden;
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    color: var(--primary-color);
-    background: rgba(255, 255, 255, 0.9);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    backdrop-filter: blur(10px);
-    
-    &::after {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    @media (max-width: 480px) {
-      width: 40px;
-      height: 40px;
-      
-      &::after {
-        font-size: 16px;
-      }
-    }
-  }
-
-  .swiper-pagination-bullet {
-    background: var(--primary-color);
-    opacity: 0.5;
-    
-    &.swiper-pagination-bullet-active {
-      opacity: 1;
-    }
-  }
-`;
-
-const ModalImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  
-  /* Enable pinch-to-zoom on mobile */
-  @media (max-width: 768px) {
-    object-fit: contain;
-    width: auto;
-    height: auto;
-    max-width: 95%;
-    max-height: 95%;
   }
 `;
 
@@ -864,6 +793,8 @@ const Projects = () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
+    // Navigation helpers are stable for this modal lifecycle
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isModalOpen]);
 
   // Cleanup thumbnail timer on unmount
