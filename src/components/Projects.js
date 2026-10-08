@@ -504,6 +504,18 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 14,
+      title: 'Sakura Global',
+      description: 'A commercial cleaning business website for Pakenham and South-East Melbourne, with coverage in Sydney. It presents office, warehouse, builders, school and childcare services, local service areas, reviews, and a free quote flow.',
+      category: 'web',
+      recent: true,
+      technologies: ['React', 'Responsive Design', 'SEO', 'Business Website', 'Quote System', 'Commercial Cleaning', 'Australia'],
+      live: 'https://sakuraglobal.com.au/',
+      images: [
+        '/assets/sakura-global/sakura.png'
+      ]
+    },
+    {
       id: 12,
       title: 'Darbid',
       description: 'A luxury auction mobile application designed to connect users with exclusive high-end products through a secure and real-time bidding experience. The platform enables seamless browsing, bidding, and winning of premium items with a smooth, user-friendly interface and real-time auction updates.',
